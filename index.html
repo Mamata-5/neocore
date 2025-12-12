@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NeoCore Quiz — Futuristic Purple Neon UI</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Sora:wght@400;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-wrap">
+    <svg class="cyber-grid" preserveAspectRatio="none" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="gridGrad" x1="0" x2="1">
+          <stop offset="0" stop-color="#0c0c10"/>
+          <stop offset="1" stop-color="#07070a"/>
+        </linearGradient>
+      </defs>
+      <rect width="100" height="100" fill="url(#gridGrad)"></rect>
+      <g id="lines" stroke="#2b153b" stroke-opacity="0.18" stroke-width="0.2"></g>
+    </svg>
+
+    <div class="glow-ring ring-1" aria-hidden="true"></div>
+    <div class="glow-ring ring-2" aria-hidden="true"></div>
+
+    <main class="container" role="main">
+      <header class="topbar">
+        <div class="logo" aria-label="NeoCore">NEO<span class="accent">CORE</span></div>
+        <nav class="nav" role="navigation" aria-label="Main">
+          <a href="#welcome" class="nav-link" data-route="welcome">Home</a>
+          <a href="#features" class="nav-link" data-route="features">Features</a>
+          <a href="#dashboard" class="nav-link" data-route="dashboard">Dashboard</a>
+          <a class="btn ghost" href="#welcome" data-route="welcome">Get Started</a>
+        </nav>
+      </header>
+
+      <!-- PAGES (SPA) -->
+      <div id="app-pages">
+        <!-- Welcome / Landing (default) -->
+        <section class="page" id="page-welcome" data-route="welcome" aria-labelledby="welcome-title">
+          <div class="hero">
+            <div class="hero-left">
+              <h1 id="welcome-title" class="title">Welcome to <span class="neon">NeoQuiz</span></h1>
+              <p class="lead">A futuristic quiz experience — animated, responsive, and deploy-ready.</p>
+              <div class="hero-ctas">
+                <!-- Start Quiz now starts GK directly -->
+                <button class="btn primary start-quiz" data-quiz="gk" id="startQuizBtn">Start Quiz</button>
+                <button class="btn secondary" data-route="features">See Features</button>
+              </div>
+            </div>
+            <div class="hero-right">
+              <div class="dashboard-card" aria-hidden="true">
+                <div class="dash-top"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+                <div class="dash-body">
+                  <div class="stat"><div class="label">Active</div><div class="value">1,248</div></div>
+                  <div class="chart-sim"></div>
+                  <div class="controls"><button class="chip">Realtime</button><button class="chip">7d</button><button class="chip">30d</button></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Choose Quiz / Categories -->
+        <section class="page" id="page-choose" data-route="choose-quiz" aria-labelledby="choose-title">
+          <h2 id="choose-title" class="section-title">Choose a Quiz</h2>
+          <div class="cards choose-cards">
+            <article class="card" tabindex="0">
+              <div class="icon">🧠</div>
+              <h3>General Knowledge</h3>
+              <p>10 questions. Timer enabled.</p>
+              <div style="margin-top:12px">
+                <button class="btn primary start-quiz" data-quiz="gk">Take Quiz</button>
+              </div>
+            </article>
+
+            <article class="card" tabindex="0">
+              <div class="icon">💻</div>
+              <h3>Web Development</h3>
+              <p>8 questions: HTML/CSS/JS</p>
+              <div style="margin-top:12px">
+                <button class="btn primary start-quiz" data-quiz="web">Take Quiz</button>
+              </div>
+            </article>
+
+            <article class="card" tabindex="0">
+              <div class="icon">🔬</div>
+              <h3>Science</h3>
+              <p>12 questions. Mixed difficulty.</p>
+              <div style="margin-top:12px">
+                <button class="btn primary start-quiz" data-quiz="science">Take Quiz</button>
+              </div>
+            </article>
+          </div>
+          <div style="margin-top:22px">
+            <button class="btn ghost" data-route="welcome">← Back</button>
+          </div>
+        </section>
+
+        <!-- Quiz Question -->
+        <section class="page" id="page-quiz" data-route="quiz" aria-labelledby="quiz-title">
+          <h2 id="quiz-title" class="section-title">Quiz</h2>
+          <div class="quiz-card">
+            <div class="quiz-header">
+              <div class="label">Question <span id="q-index">1</span>/<span id="q-total">10</span></div>
+              <div class="timer" id="timer">00:30</div>
+            </div>
+
+            <div class="quiz-body" id="quiz-body">
+              <p id="question-text" class="question-text">Loading question...</p>
+              <div class="options" id="options"></div>
+            </div>
+
+            <div class="quiz-footer">
+              <button class="btn ghost" data-route="choose-quiz">Quit</button>
+              <button class="btn primary" id="nextBtn">Next</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Results -->
+        <section class="page" id="page-result" data-route="result" aria-labelledby="result-title">
+          <h2 id="result-title" class="section-title">Results</h2>
+          <div class="result-card">
+            <div class="score">You scored <span id="score">0</span>/<span id="score-total">0</span></div>
+            <p id="result-text" class="lead">Nice work — share your result or try again.</p>
+            <div style="margin-top:16px">
+              <button class="btn primary" data-route="choose-quiz">Try Another Quiz</button>
+              <button class="btn ghost" data-route="welcome">Back to Home</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Features -->
+        <section class="page" id="page-features" data-route="features" aria-labelledby="features-title">
+          <h2 id="features-title" class="section-title">Features</h2>
+          <div class="cards">
+            <article class="card"><div class="icon">⚡</div><h3>Realtime</h3><p>Live updates & animations.</p></article>
+            <article class="card"><div class="icon">🔒</div><h3>Secure</h3><p>Local-first quiz state; optional server sync.</p></article>
+            <article class="card"><div class="icon">🎨</div><h3>Customizable</h3><p>Theme tokens & component library.</p></article>
+          </div>
+          <div style="margin-top:22px">
+            <button class="btn ghost" data-route="welcome">← Back</button>
+          </div>
+        </section>
+
+        <!-- Dashboard (placeholder) -->
+        <section class="page" id="page-dashboard" data-route="dashboard" aria-labelledby="dash-title">
+          <h2 id="dash-title" class="section-title">Dashboard</h2>
+          <p class="lead">Summary, recent attempts and stats.</p>
+          <div style="margin-top:22px">
+            <button class="btn ghost" data-route="welcome">← Back</button>
+          </div>
+        </section>
+      </div>
+
+      <footer class="footer" role="contentinfo">
+        <div>© <span id="year"></span> NeoCore — Quiz</div>
+        <div class="footer-links"><a href="#features" data-route="features">Docs</a><a href="#privacy">Privacy</a></div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
